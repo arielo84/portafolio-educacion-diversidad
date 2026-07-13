@@ -1,0 +1,673 @@
+/* =========================================
+   Variables de Tema (Light/Dark Mode)
+   ========================================= */
+/* Tema Oscuro por defecto */
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --heading-color: #ffffff;
+  --card-bg: #1e1e24;
+  --primary-color: #00e5ff; /* Cian brillante */
+  --secondary-color: #b388ff; /* Morado llamativo */
+  --navbar-bg: rgba(18, 18, 18, 0.9);
+  --border-color: #333;
+}
+
+/* Tema Claro (se activa mediante JS) */
+[data-theme="light"] {
+  --bg-color: #f8f9fa;
+  --text-color: #333333;
+  --heading-color: #111111;
+  --card-bg: #ffffff;
+  --primary-color: #007bff; /* Azul clásico */
+  --secondary-color: #6f42c1; /* Morado oscuro */
+  --navbar-bg: rgba(248, 249, 250, 0.9);
+  --border-color: #eaeaea;
+}
+
+/* =========================================
+   Reseteo y Tipografía
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.7;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+  position: relative;
+  overflow-x: hidden; /* Evita scroll horizontal por los orbes */
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--heading-color);
+  transition: color 0.4s ease;
+}
+
+/* =========================================
+   UI Espectacular: Glowing Orbs (Fondo Animado)
+   ========================================= */
+.background-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: float 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--primary-color);
+  top: -100px;
+  left: -100px;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--secondary-color);
+  bottom: -150px;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+.orb-3 {
+  width: 300px;
+  height: 300px;
+  background: #ff007f;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(50px, -50px) scale(1.2);
+  }
+  66% {
+    transform: translate(-30px, 40px) scale(0.9);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* =========================================
+   Navegación
+   ========================================= */
+.header {
+  background-color: var(--navbar-bg);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.logo span {
+  color: var(--primary-color);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   Hero Section
+   ========================================= */
+.hero {
+  text-align: center;
+  padding: 6rem 0;
+}
+
+.subtitle {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.gradient-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+
+/* =========================================
+   Sobre Mí
+   ========================================= */
+.about-section {
+  padding: 4rem 0;
+  background-color: rgba(30, 30, 36, 0.2);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.4s ease;
+  backdrop-filter: blur(5px);
+}
+
+[data-theme="light"] .about-section {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.about-image img {
+  border-radius: 50%;
+  border: 4px solid var(--primary-color);
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-image img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+}
+
+.about-text h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+/* =========================================
+   Tarjetas de Clases (Glassmorphism)
+   ========================================= */
+.modules-section {
+  padding: 5rem 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+/* FIX: min(300px, 100%) evita que el grid fuerce overflow horizontal
+   en viewports angostos (donde el contenedor real es menor a 300px) */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  /* FIX: gradiente propio de respaldo (primary/secondary a baja opacidad)
+     para que el efecto glass no dependa de si un orbe fijo coincide con
+     esa parte de la pantalla al hacer scroll. Antes, tarjetas largas se
+     veían "cortadas": una parte con color, otra plana/negra. */
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--primary-color) 10%, transparent),
+      color-mix(in srgb, var(--secondary-color) 10%, transparent)
+    ),
+    rgba(30, 30, 36, 0.75);
+  /* FIX: sin backdrop-filter en las cards. Con 13 tarjetas + navbar + modal
+     usando blur simultáneo, el navegador supera su límite de composición y
+     deja de aplicar el efecto pasadas las primeras 4-5 (se ven "planas").
+     El gradiente propio de arriba ya da el look glass sin depender del blur. */
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  min-width: 0; /* Evita que el contenido interno (texto largo) empuje el ancho de la card */
+}
+
+[data-theme="light"] .card {
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--primary-color) 6%, transparent),
+      color-mix(in srgb, var(--secondary-color) 6%, transparent)
+    ),
+    rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.4);
+  border-color: var(--primary-color);
+}
+
+.card h3 {
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.card h3:hover {
+  color: var(--secondary-color);
+  text-shadow: 0 0 12px var(--secondary-color);
+  transform: translateX(8px);
+  cursor: default;
+}
+
+.reflection {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: rgba(179, 136, 255, 0.1);
+  border-left: 4px solid var(--secondary-color);
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.btn-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: #121212;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: opacity 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-link:hover {
+  opacity: 0.8;
+}
+
+/* =========================================
+   UI Espectacular: Animaciones al Scroll
+   ========================================= */
+.hidden-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.show-scroll {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* =========================================
+   Visor de PDF Flotante (Glassmorphism Modal)
+   ========================================= */
+.pdf-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ajustes para el Modal y el visor PDF */
+.modal-content {
+  position: relative;
+  width: 90vw; /* Aseguramos que nunca toque los bordes */
+  height: 80vh;
+  background: #000; /* Fondo negro para que no se vea desproporcionado */
+  border-radius: 8px;
+  border: 1px solid var(--primary-color);
+  padding: 0; /* Padding 0 para no restar espacio al visor */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--primary-color);
+  color: #121212;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2000; /* Aseguramos que siempre esté por encima */
+}
+
+.close-modal:hover {
+  transform: scale(1.1);
+  background: var(--secondary-color);
+}
+
+#pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+}
+
+/* =========================================
+   JERARQUÍA VISUAL DE TARJETAS
+   ========================================= */
+
+.material-prefix {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
+  margin-right: 0.5rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.document-title {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card h3 {
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.card strong,
+.card h4 {
+  color: var(--secondary-color);
+}
+
+.card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 1rem;
+}
+
+.section-sintesis strong {
+  color: #f39c12;
+}
+
+.section-adjunto h4 {
+  color: #3498db;
+}
+
+.section-reflexion h4 {
+  color: #e7186f;
+}
+
+.highlight-name {
+  color: var(--primary-color);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.highlight-name:hover {
+  color: var(--secondary-color);
+  text-shadow: 0 0 12px rgba(179, 136, 255, 0.6);
+  cursor: default;
+}
+
+/* =========================================
+   Optimización para impresión (PDF)
+   ========================================= */
+@media print {
+  :root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --heading-color: #000000;
+    --card-bg: #ffffff;
+    --border-color: #ccc;
+  }
+  body {
+    overflow-x: visible;
+  }
+  .header,
+  .theme-btn,
+  .btn-link,
+  .about-image,
+  .background-effects,
+  .pdf-modal {
+    display: none;
+  }
+  .gradient-text {
+    -webkit-text-fill-color: #000;
+    background: none;
+  }
+  .card {
+    box-shadow: none;
+    background: #fff;
+    backdrop-filter: none;
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+  .hidden-scroll {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================================
+   FIX RESPONSIVE: HEADER & NAV
+   ========================================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .nav-links {
+    gap: 1rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .gradient-text {
+    font-size: 2.2rem;
+  }
+
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* FIX: en mobile sacamos el efecto glass (backdrop-filter) de las
+     tarjetas. Con 13 cards + navbar + about-section usando blur, muchos
+     navegadores mobile superan su límite de composición y dejan de
+     blurear pasadas las primeras 4-5 (se ven planas e inconsistentes).
+     En vez de perseguir ese límite, usamos un color sólido: más liviano
+     para la GPU del celular y visualmente parejo en las 13 tarjetas. */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+  }
+
+  [data-theme="light"] .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+  }
+
+  .header,
+  .about-section {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background-color: var(--bg-color);
+  }
+
+  /* El modal del PDF es un solo elemento (no se acumula), así que
+     conserva su blur sin problema. */
+
+  /* FIX: el modal ocupa toda la pantalla en mobile y usa dvh
+     (altura dinámica real) para evitar saltos por la barra de
+     direcciones de Safari/Chrome mobile */
+  .modal-content {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .close-modal {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+/* =========================================
+   MENÚ RESPONSIVO (Desktop hidden, Mobile show)
+   ========================================= */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-color);
+  transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    flex-direction: column;
+    background: var(--navbar-bg);
+    width: 100%;
+    padding: 2rem 0;
+    transition: right 0.4s ease;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+}
