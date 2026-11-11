@@ -99,6 +99,18 @@ window.addEventListener("click", (e) => {
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
 
+/* =========================================
+   Botón para volver al inicio
+   ========================================= */
+const backToTop = document.querySelector(".back-to-top");
+
+const updateBackToTopVisibility = () => {
+  backToTop?.classList.toggle("visible", window.scrollY > 450);
+};
+
+window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
+updateBackToTopVisibility();
+
 // Alternar menú
 hamburger.addEventListener("click", (e) => {
   e.stopPropagation(); // Evita que el clic se propague al document

@@ -35,6 +35,36 @@
   font-family: "Poppins", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-color) var(--bg-color);
+}
+
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border: 3px solid var(--bg-color);
+  border-radius: 999px;
+  transition: background-color 0.25s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+img,
+iframe {
+  max-width: 100%;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -44,12 +74,39 @@ body {
     color 0.4s ease;
   position: relative;
   overflow-x: hidden; /* Evita scroll horizontal por los orbes */
+  overflow-x: clip;
 }
 
 .container {
   width: 90%;
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.subtitle.program-subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 1.25rem;
+}
+
+.program-logo {
+  width: 4.2rem;
+  height: 4.2rem;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 600px) {
+  .subtitle.program-subtitle {
+    gap: 0.45rem;
+    font-size: 1.08rem;
+  }
+
+  .program-logo {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
 }
 
 h1,
@@ -64,13 +121,14 @@ h3 {
    ========================================= */
 .background-effects {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: auto;
+  height: auto;
+  min-height: 100dvh;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  contain: paint;
 }
 
 .orb {
@@ -149,6 +207,25 @@ h3 {
   color: var(--primary-color);
 }
 
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.logo {
+  font-size: 1.35rem;
+}
+
+.site-author {
+  color: var(--secondary-color);
+  font-size: 0.5rem;
+  font-weight: 300;
+  letter-spacing: 0.15px;
+  white-space: nowrap;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -159,6 +236,7 @@ h3 {
   color: var(--text-color);
   text-decoration: none;
   font-weight: 600;
+  font-size: 0.9rem;
   transition: color 0.3s ease;
 }
 
@@ -213,6 +291,28 @@ h3 {
   max-width: 600px;
   margin: 0 auto;
   opacity: 0.8;
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+.integration-section {
+  padding: 0 0 4rem;
+}
+
+.integration-card {
+  text-align: center;
+  border-color: var(--secondary-color);
+}
+
+.integration-card h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.integration-card p + p {
+  margin-top: 1rem;
 }
 
 /* =========================================
@@ -305,6 +405,7 @@ h3 {
     box-shadow 0.3s ease,
     border-color 0.3s ease;
   min-width: 0; /* Evita que el contenido interno (texto largo) empuje el ancho de la card */
+  overflow-wrap: anywhere;
 }
 
 [data-theme="light"] .card {
@@ -408,6 +509,7 @@ h3 {
   position: relative;
   width: 90vw; /* Aseguramos que nunca toque los bordes */
   height: 80vh;
+  max-height: 90dvh;
   background: #000; /* Fondo negro para que no se vea desproporcionado */
   border-radius: 8px;
   border: 1px solid var(--primary-color);
@@ -453,6 +555,11 @@ h3 {
   padding: 2rem;
   border-top: 1px solid var(--border-color);
   margin-top: 2rem;
+}
+
+.footer p {
+  font-size: 0.78rem;
+  opacity: 0.75;
 }
 
 /* =========================================
@@ -565,10 +672,19 @@ h3 {
    ========================================= */
 
 @media (max-width: 768px) {
+  .brand {
+    gap: 0.35rem;
+  }
+
+  .site-author {
+    font-size: 0.44rem;
+  }
+
   .navbar {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 0;
+    position: relative;
+    flex-direction: row;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
   }
 
   .nav-links {
@@ -583,6 +699,25 @@ h3 {
 
   .hero {
     padding: 3rem 0;
+  }
+
+  /* Chrome Android puede dibujar una línea oscura en el borde del viewport
+     al combinar elementos fixed, blur y animación. En pantallas pequeñas
+     usamos el fondo sólido del tema para evitar ese artefacto y mejorar el
+     rendimiento sin afectar el contenido. */
+  .background-effects {
+    display: none;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .program-subtitle {
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    letter-spacing: 1px;
   }
 
   .about-container {
@@ -622,6 +757,7 @@ h3 {
   .modal-content {
     width: 100vw;
     height: 100dvh;
+    max-height: 100dvh;
     border-radius: 0;
     border: none;
   }
@@ -669,5 +805,56 @@ h3 {
 
   .nav-links.active {
     right: 0;
+  }
+}
+
+/* =========================================
+   Botón volver al inicio
+   ========================================= */
+.back-to-top {
+  position: fixed;
+  left: 1.25rem;
+  bottom: 1.5rem;
+  z-index: 20;
+  width: 2.9rem;
+  height: 2.9rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--primary-color);
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--primary-color);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s ease,
+    transform 0.25s ease,
+    background-color 0.25s ease;
+  box-shadow: 0 0 1rem rgba(0, 229, 255, 0.25);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--primary-color);
+  color: var(--bg-color);
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .back-to-top {
+    left: 0.85rem;
+    bottom: 1rem;
   }
 }
